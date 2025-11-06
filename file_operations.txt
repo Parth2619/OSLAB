@@ -1,0 +1,45 @@
+#!/bin/bash
+# Shell script to perform file operations
+
+echo "1. Copy File"
+echo "2. Move File"
+echo "3. Rename File"
+echo "4. Delete File"
+echo "Enter your choice:"
+read ch
+
+case $ch in
+1)
+echo "Enter Source File Name:"
+read src
+echo "Enter Destination File Name:"
+read dest
+cp $src $dest
+echo "File copied successfully."
+;;
+2)
+echo "Enter Source File Name:"
+read src
+echo "Enter Destination Path:"
+read dest
+mv $src $dest
+echo "File moved successfully."
+;;
+3)
+echo "Enter Current File Name:"
+read old
+echo "Enter New File Name:"
+read new
+mv $old $new
+echo "File renamed successfully."
+;;
+4)
+echo "Enter File Name to Delete:"
+read file
+rm $file
+echo "File deleted successfully."
+;;
+*)
+echo "Invalid Choice"
+;;
+esac
