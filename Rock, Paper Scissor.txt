@@ -1,0 +1,62 @@
+#!/bin/bash
+
+play_game() {
+    choices=("Rock" "Paper" "Scissors")
+    comp_choice=${choices[$((RANDOM % 3))]}
+
+    echo "Choose one:"
+    echo "1) Rock"
+    echo "2) Paper"
+    echo "3) Scissors"
+    read -p "Enter your choice (1-3): " user_input
+
+    case $user_input in
+        1)
+            user_pick="Rock"
+            ;;
+        2)
+            user_pick="Paper"
+            ;;
+        3)
+            user_pick="Scissors"
+            ;;
+        *)
+            echo "Invalid choice. Please try again."
+            return
+            ;;
+    esac
+
+    echo "You chose: $user_pick"
+    echo "Computer chose: $comp_choice"
+
+    if [[ "$user_pick" == "$comp_choice" ]]; then
+        echo "It's a tie!"
+    elif [[ ("$user_pick" == "Rock" && "$comp_choice" == "Scissors") || \
+            ("$user_pick" == "Paper" && "$comp_choice" == "Rock") || \
+            ("$user_pick" == "Scissors" && "$comp_choice" == "Paper") ]]; then
+        echo "You win!"
+    else
+        echo "Computer wins!"
+    fi
+}
+
+menu() {
+    echo
+    echo "Welcome to the Rock-Paper-Scissors Game"
+    echo "1) Play Game"
+    echo "2) Quit"
+    read -p "Please enter your choice: " choice
+
+    if [[ "$choice" -eq 1 ]]; then
+        play_game
+    elif [[ "$choice" -eq 2 ]]; then
+        echo "Goodbye!"
+        exit 0
+    else
+        echo "Invalid option, please try again."
+    fi
+}
+
+while true; do
+    menu
+done
